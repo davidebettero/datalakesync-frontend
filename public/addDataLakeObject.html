@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .header-container h1 {
+        margin: 0;
+        text-align: center;
+        flex-grow: 1;
+      }
+
+      #database-select {
+        margin-right: 10px;
+      }
+
+      .columns-grid {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #loading-message {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .popup-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        text-align: center;
+      }
+
+      .close-btn {
+        color: red;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close-btn:hover {
+        color: darkred;
+      }
+
+      input[type="text"] {
+        background-color: white;
+        color: black;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-container">
+      <button
+        onclick="window.location.href = 'index.html'"
+        style="margin-left: 10px"
+      >
+        Torna alla pagina principale
+      </button>
+      <h1 style="margin-left: 40px">Aggiungi un nuovo DataLake Object</h1>
+      <select id="database-select" class="custom-select"></select>
+    </div>
+
+    <form id="add-object-form">
+      <div style="margin-bottom: 40px">
+        <label for="objectName">Object Name:</label>
+        <input type="text" id="objectName" maxlength="6" required />
+        <label for="objectType">Column Prefix:</label>
+        <input type="text" id="objectType" maxlength="2" required />
+      </div>
+
+      <button type="button" id="fetch-columns-btn" disabled>
+        Recupera Colonne
+      </button>
+
+      <div id="loading-message">
+        <div class="loader"></div>
+        <p>Caricamento in corso...</p>
+      </div>
+
+      <div id="columns-container" class="columns-grid"></div>
+
+      <div style="margin-top: 20px; text-align: center">
+        <button type="submit" id="submit-btn" disabled>Aggiungi</button>
+      </div>
+    </form>
+
+    <div id="popup-message" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <p id="popup-text"></p>
+      </div>
+    </div>
+
+    <div id="message" style="margin-top: 20px; color: black"></div>
+
+    <script src="addDataLakeObjectScript.js"></script>
+  </body>
+</html>

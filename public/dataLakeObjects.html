@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataLake Objects</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <button onclick="tornaAllaPaginaPrincipale()">
+        Torna alla pagina principale
+      </button>
+      <h1>DataLake Objects</h1>
+    </div>
+
+    <table id="tabella-dati" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Object Name</th>
+          <th>Columns</th>
+          <th>Column Prefix</th>
+          <th>Unique Key</th>
+          <th>Excluded Column</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Qui verranno inseriti i dati dinamicamente -->
+      </tbody>
+    </table>
+
+    <script src="dataLakeObjectsFunctions.js"></script>
+  </body>
+</html>

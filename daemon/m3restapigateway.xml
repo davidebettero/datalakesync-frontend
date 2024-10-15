@@ -1,0 +1,32 @@
+<service>
+	<id>m3restapigateway.exe</id>
+	<name>M3 Rest api gateway</name>
+	<description>Nodejs - D. Guastalli.</description>
+	<executable>E:\Infor\m3ExpressGateway\NodeJS\node.exe</executable>
+	<argument>--harmony</argument>
+	<argument>--max_old_space_size=4096</argument>
+	<argument>E:\Infor\proxy_node\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>--file</argument>
+	<argument>E:\Infor\proxy_node\proxy.js</argument>
+	<argument>--scriptoptions=</argument>
+	<argument>--log</argument>
+	<argument>M3 Rest api gateway wrapper</argument>
+	<argument>--grow</argument>
+	<argument>0.25</argument>
+	<argument>--wait</argument>
+	<argument>1</argument>
+	<argument>--maxrestarts</argument>
+	<argument>3</argument>
+	<argument>--abortonerror</argument>
+	<argument>n</argument>
+	<argument>--stopparentfirst</argument>
+	<argument>undefined</argument>
+	<logmode>rotate</logmode>
+	<stoptimeout>30sec</stoptimeout>
+	<serviceaccount>
+		<domain>V-BNCLSP-TST</domain>
+		<user>LocalSystem</user>
+		<password></password>
+	</serviceaccount>
+	<workingdirectory>E:\Infor\proxy_node</workingdirectory>
+</service>

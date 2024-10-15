@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataLake Environment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <button onclick="tornaAllaPaginaPrincipale()">
+        Torna alla pagina principale
+      </button>
+      <h1>DataLake Environment</h1>
+    </div>
+
+    <table id="tabella-dati" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>DataLake Object</th>
+          <th>Environment</th>
+          <th>Schedulation</th>
+          <th>Active YN</th>
+          <th>Last ID</th>
+          <th>Last Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Qui verranno inseriti i dati dinamicamente -->
+      </tbody>
+    </table>
+
+    <div class="action-buttons">
+      <button id="modifica-btn" onclick="abilitaModifica()">Modifica</button>
+      <button
+        id="annulla-btn"
+        onclick="annullaModifiche()"
+        style="display: none"
+      >
+        ANNULLA
+      </button>
+      <button id="salva-btn" onclick="salvaModifiche()" style="display: none">
+        SALVA
+      </button>
+    </div>
+
+    <script src="dataLakeEnvironmentFunctions.js"></script>
+  </body>
+</html>

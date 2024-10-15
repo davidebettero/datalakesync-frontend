@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage DataLake Sync</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .button-group button {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Manage DataLake Sync</h1>
+
+    <div class="button-group">
+      <button onclick="seeTargetDatabase()">Visualizza DB target</button>
+      <button onclick="seeDataLakeEnvironment()">
+        Visualizza DataLake Environment
+      </button>
+      <button onclick="seeLogs()">Visualizza Log</button>
+    </div>
+
+    <div class="button-group">
+      <button onclick="seeDataLakeObjects()">
+        Visualizza DataLake Objects
+      </button>
+      <button onclick="addDataLakeObject()">Aggiungi DataLake Object</button>
+    </div>
+
+    <form
+      id="file-upload-form"
+      style="margin: 20px"
+      enctype="multipart/form-data"
+      method="POST"
+      action="/upload"
+      onsubmit="uploadFile(event)"
+    >
+      <input type="file" name="file" id="file" required />
+      <button type="submit" id="upload-button" disabled>
+        Carica .ionapi File
+      </button>
+    </form>
+
+    <div id="message" class="message"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataLake Environment Logs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <button onclick="tornaAllaPaginaPrincipale()">
+        Torna alla pagina principale
+      </button>
+      <h1>DataLake Environment Logs</h1>
+    </div>
+
+    <table id="tabella-dati" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>DataLake Environment ID</th>
+          <th>Timestamp</th>
+          <th>ObjectID</th>
+          <th>Time Used ms</th>
+          <th>Records Read</th>
+          <th>Records Inserted</th>
+          <th>Records Updated</th>
+          <th>Records Deleted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Qui verranno inseriti i dati dinamicamente -->
+      </tbody>
+    </table>
+
+    <script src="logsFunctions.js"></script>
+  </body>
+</html>
