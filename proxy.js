@@ -426,30 +426,6 @@ app.post("/addDataLakeObject", (req, res) => {
   });
 });
 
-// Route per aggiornare la colonna activeYN nella tabella dataLakeEnvironment
-app.post("/updateActiveYN", (req, res) => {
-  const modifiche = req.body;
-
-  db.serialize(() => {
-    const updateQuery = `UPDATE dataLakeEnvironment SET activeYN = ? WHERE id = ?`;
-
-    modifiche.forEach((modifica) => {
-      db.run(updateQuery, [modifica.activeYN, modifica.id], (err) => {
-        if (err) {
-          console.error("Errore durante l'aggiornamento di Active YN:", err);
-          return res.status(500).json({
-            success: false,
-            message: "Errore nel server durante l'aggiornamento.",
-          });
-        }
-      });
-    });
-
-    // Se tutte le query sono andate a buon fine, risponde con successo
-    res.json({ success: true, message: "Modifiche salvate con successo!" });
-  });
-});
-
 // Route per eliminare un record da dataLakeObjects e conseguentemente da dataLakeEnvironment
 app.post("/eliminaDataLakeObject", (req, res) => {
   const { id } = req.body;
@@ -534,6 +510,42 @@ app.post("/eliminaDataLakeObject", (req, res) => {
           });
         });
       });
+    });
+  });
+});
+
+// Route per aggiornare Active YN e Record Schedulation nel database nella tabella dataLakeEnvironment
+app.post("/updateDataLakeEnvironment", (req, res) => {
+  const modifiche = req.body;
+
+  // Inizio della transazione per garantire che tutte le modifiche siano applicate insieme
+  db.serialize(() => {
+    db.run("BEGIN TRANSACTION");
+
+    modifiche.forEach((modifica) => {
+      const { id, activeYN, recordSchedulation } = modifica;
+
+      // Aggiorna Active YN e Record Schedulation per ogni riga modificata
+      db.run(
+        `UPDATE dataLakeEnvironment SET activeYN = ?, recordSchedulation = ? WHERE id = ?`,
+        [activeYN, recordSchedulation || null, id], // recordSchedulation può essere null se vuoto
+        (err) => {
+          if (err) {
+            console.error("Errore durante l'aggiornamento del database:", err);
+            db.run("ROLLBACK");
+            return res.status(500).json({ success: false });
+          }
+        }
+      );
+    });
+
+    // Commit della transazione
+    db.run("COMMIT", (err) => {
+      if (err) {
+        console.error("Errore durante il commit della transazione:", err);
+        return res.status(500).json({ success: false });
+      }
+      res.json({ success: true });
     });
   });
 });
